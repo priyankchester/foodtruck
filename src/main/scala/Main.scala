@@ -42,8 +42,9 @@ object Main extends App {
   //println(x)
 
   MySQL.init()
-  datas.foreach(data =>
-    MySQL.insertIntoTable(new Truck(data.name, data.location, data.time, data.day, data.hood, "", ""))
+datas.foreach(
+
+data =>MySQL.insertIntoTable(new Truck(data.name, data.location, data.time, data.day, data.hood, "", ""))
   )
 
   cuisines.foreach(cuisine =>

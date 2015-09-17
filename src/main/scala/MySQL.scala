@@ -23,7 +23,7 @@ object MySQL {
     Class.forName(driver)
     connection = DriverManager.getConnection(url, username, password)
 
-    preparedStmt += "insertIntoTable" -> connection.prepareStatement("INSERT INTO food_trucks (truck_name, location, time, day, hood, cuisine, description) VALUES (?, ?, ?, ?, ?, ?, ?)")
+    preparedStmt += "insertIntoTable" -> connection.prepareStatement("INSERT INTO food_trucks (truck_name, location, time, day, hood, cuisine, latitude,longitude, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")
     preparedStmt += "updateCuisine" -> connection.prepareStatement("UPDATE food_trucks SET cuisine = ?, description = ? where truck_name = ?")
 
     val stmt = connection.prepareStatement("TRUNCATE TABLE food_trucks")
@@ -40,7 +40,9 @@ object MySQL {
       stmt.setString(4, s"${truck.day}")
       stmt.setString(5, s"${truck.hood}")
       stmt.setString(6, s"${truck.cuisine}")
-      stmt.setString(7, s"${truck.description}")
+      stmt.setString(7, s"${truck.latitude}")
+      stmt.setString(8, s"${truck.longitude}")
+      stmt.setString(9, s"${truck.description}")
       stmt.execute()
       Right("Success")
     } catch{
